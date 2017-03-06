@@ -25,7 +25,7 @@ var PlayGame =
 	create: function()
 	{
         background = game.add.tileSprite(0,0,400,600,'background');
-        rocket = game.add.sprite(160,400,'rocket');
+        rocket = game.add.sprite(171,520,'rocket');
 	},
 	update: function()
 	{
