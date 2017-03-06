@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Phaser.io</title>
+	<script type="text/javascript" src="lib/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+
+var game = new Phaser.Game(400,600,Phaser.AUTO);
+
+var Preload =
+{
+	preload: function() {
+	},
+	create: function() {
+		this.game.state.start("PlayGame");
+	}
+};
+
+var PlayGame =
+{
+	create: function()
+	{
+	},
+	update: function()
+	{
+	}
+};
+
+game.state.add('Preload', Preload);
+game.state.add('PlayGame',PlayGame);
+game.state.start('Preload');
+</script>
+</body>
+</html>

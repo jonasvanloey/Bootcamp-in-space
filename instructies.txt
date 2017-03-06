@@ -1,0 +1,15 @@
+- Maak een game met deze 2 states: Preload & PlayGame
+- Preload in de Preload State alle afbeeldingen. 
+- Start de "PlayGame" state van zodra alles geladen is.
+- Plaats de afbeelding van het varkentje op de stage. Horizontaal gezien in het midden, vertikaal een stukje onder het midden.
+- Zorg ervoor dat er een instantie vande munt-animatie wordt aangemaakt wanneer je ergens op de stage klikt. De animatie van de draaiende munt moet zich blijven herhalen.
+- Zorg ervoor dat de munt - gebruik makende van Arcade Physics - naar beneden valt (onder de invloed van de zwaartekracht).
+- Zorg ervoor dat munten die het varken raken verdwijnen. Verhoog een teller telkens er een munt het varken raakt. 
+  Tip: de collision-methode stelt je in staat te detecteren wanneer objecten botsen. Je hebt nog een andere functie waarmee je kan nagaan of objecten elkaar raken / overlappen.
+- Toon de teller in de console (telkens wanneer deze van waarde verandert)
+- Munten die het varken niet raken vallen gewoon verder tot voorbij de onderrand van de stage.
+
+Gegevens:
+  Elke frame van de draaiende munt sprite sheet is 50 x 50 pixels.
+  breedte game: 400
+  hoogte game:  600
