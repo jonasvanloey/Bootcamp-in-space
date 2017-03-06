@@ -11,32 +11,6 @@
     </style>
 </head>
 <body>
-<script type="text/javascript">
-
-var game = new Phaser.Game(400,600,Phaser.AUTO);
-
-var Preload =
-{
-	preload: function() {
-	},
-	create: function() {
-		this.game.state.start("PlayGame");
-	}
-};
-
-var PlayGame =
-{
-	create: function()
-	{
-	},
-	update: function()
-	{
-	}
-};
-
-game.state.add('Preload', Preload);
-game.state.add('PlayGame',PlayGame);
-game.state.start('Preload');
-</script>
+<script type="text/javascript" src="game.js"></script>
 </body>
 </html>
