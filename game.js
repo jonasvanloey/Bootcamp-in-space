@@ -29,6 +29,7 @@ var PlayGame =
 	},
 	update: function()
 	{
+		/*background.tilePosition.y += 4;*/
 	}
 };
 
