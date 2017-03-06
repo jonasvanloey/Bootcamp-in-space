@@ -35,6 +35,7 @@ var PlayGame =
 
        
         game.time.events.loop(Phaser.Timer.SECOND*3, this.RandomAstroid, this);
+        game.time.events.loop(Phaser.Timer.SECOND*2, this.RandomAstroid, this);
 
        
 		
@@ -48,12 +49,13 @@ var PlayGame =
 			console.log("timer is 0");
 			
 		}
-		/*console.log(timer);
-		/*background.tilePosition.y += 4;*/
+	
+		//background.tilePosition.y += 3;
 	},
 	RandomAstroid: function(){
+		/*TODO astroid out of bounds = dead*/
 		randomX = game.rnd.integerInRange(-80,400);
-		astroidrnd = astroids.create(randomX,0,'astroid');
+		astroidrnd = astroids.create(randomX,-80,'astroid');
 		astroidrnd.scale.setTo(game.rnd.realInRange(0.4,1.2))
 		game.physics.arcade.enable(astroidrnd);
 		astroidrnd.body.velocity.setTo(0,300);
