@@ -6,13 +6,12 @@ var move;
 var astroids;
 var astroidrnd;
 var timer;
-<<<<<<< HEAD
+var enemy;
 var size;
 var tween;
-=======
+
 var touch;
 
->>>>>>> origin/master
 var Preload =
 {
 	preload: function() {
@@ -20,6 +19,7 @@ var Preload =
         game.load.image('rocket','assets/rocket.png');
         game.load.image('bullet','assets/bullet.png');
         game.load.image('astroid','assets/astroid.png');
+        game.load.image('enemy','assets/enemy.png');
         },
 	create: function() {
 		this.game.state.start("PlayGame");
@@ -33,6 +33,7 @@ var PlayGame =
         game.physics.startSystem(Phaser.Physics.ARCADE);
         background = game.add.tileSprite(0,0,400,600,'background');
         rocket = game.add.sprite(171,520,'rocket');
+        enemy = game.add.sprite(171,520,'enemy');
         
         astroids = game.add.group();
         game.time.events.loop(Phaser.Timer.SECOND*3, this.RandomAstroid, this);
@@ -83,16 +84,16 @@ var PlayGame =
             }
             }
 
-<<<<<<< HEAD
+
 		
 	
 		//background.tilePosition.y += 3;
 	},
-=======
+
 		},
       
->>>>>>> origin/master
-	RandomAstroid: function(){
+
+RandomAstroid: function(){
 		/*TODO astroid out of bounds = dead*/
 		randomX = game.rnd.integerInRange(-80,400);
 		astroidrnd = astroids.create(randomX,-80,'astroid');
@@ -102,7 +103,7 @@ var PlayGame =
         game.add.tween(astroidrnd.scale).to( {x:size,y:size },1000, Phaser.Easing.Linear.None, true);
         game.add.tween(astroidrnd).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
 		game.physics.arcade.enable(astroidrnd);
-<<<<<<< HEAD
+
 		if(size < 0.8)
 		{
 			
@@ -114,10 +115,6 @@ var PlayGame =
 		}
          
 		
-
-=======
-		astroidrnd.body.velocity.setTo(0,300);
->>>>>>> origin/master
 	}
 };
 
