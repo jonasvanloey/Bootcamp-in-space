@@ -2,11 +2,17 @@ var game = new Phaser.Game(400,600,Phaser.AUTO);
 var rocket;
 var background;
 var bullet;
+var move;
 var astroids;
 var astroidrnd;
 var timer;
+<<<<<<< HEAD
 var size;
 var tween;
+=======
+var touch;
+
+>>>>>>> origin/master
 var Preload =
 {
 	preload: function() {
@@ -17,40 +23,75 @@ var Preload =
         },
 	create: function() {
 		this.game.state.start("PlayGame");
-	},
-    update: function()
-	{
 	}
 };
 
 var PlayGame =
 {
-    preload: function() {
-    },
 	create: function()
 	{
-		game.physics.startSystem(Phaser.Physics.ARCADE);
+        game.physics.startSystem(Phaser.Physics.ARCADE);
         background = game.add.tileSprite(0,0,400,600,'background');
         rocket = game.add.sprite(171,520,'rocket');
-        astroids = game.add.group();
         
-
-       
+        astroids = game.add.group();
         game.time.events.loop(Phaser.Timer.SECOND*3, this.RandomAstroid, this);
         game.time.events.loop(Phaser.Timer.SECOND*2, this.RandomAstroid, this);
-
-       
-		
-
-		
+        
+        game.physics.arcade.enable(rocket);
+        
+        game.input.onDown.add(moveIsTrue, this);
+        
+        game.input.onUp.add(moveIsFalse);
 	},
 	update: function()
 	{
+        if(move && game.input.activePointer.positionDown.y > 500)
+        {
+            console.log();
+            Movement(touch);
+        }
+        else
+        {
+            move = false;
+        }
+		/*background.tilePosition.y += 4;*/
+        if(!move && rocket.body.velocity.x != 0)
+        {
+            if(rocket.body.velocity.x < 0)
+                {
+                rocket.body.velocity.x += 10;
+                }
+            else if(rocket.body.velocity.x > 0)
+                {
+                    rocket.body.velocity.x -= 10;
+                }
+        }
+        if(rocket.position.x == 0)
+        {
+            rocket.body.velocity.x = 0;    
+        }
+        if(rocket.position.x == 343)
+        {
+            rocket.body.velocity.x = 0;    
+        }
+        if(touch != null)
+            {
+        if(rocket.position.x+28 < touch.x+15 && rocket.position.x+28 > touch.x-15)
+            {
+                rocket.body.velocity.x = 0;
+            }
+            }
 
+<<<<<<< HEAD
 		
 	
 		//background.tilePosition.y += 3;
 	},
+=======
+		},
+      
+>>>>>>> origin/master
 	RandomAstroid: function(){
 		/*TODO astroid out of bounds = dead*/
 		randomX = game.rnd.integerInRange(-80,400);
@@ -61,6 +102,7 @@ var PlayGame =
         game.add.tween(astroidrnd.scale).to( {x:size,y:size },1000, Phaser.Easing.Linear.None, true);
         game.add.tween(astroidrnd).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
 		game.physics.arcade.enable(astroidrnd);
+<<<<<<< HEAD
 		if(size < 0.8)
 		{
 			
@@ -73,8 +115,34 @@ var PlayGame =
          
 		
 
+=======
+		astroidrnd.body.velocity.setTo(0,300);
+>>>>>>> origin/master
 	}
 };
+
+function moveIsTrue(pointer)
+{
+    move = true;
+    touch = pointer;
+}
+
+function moveIsFalse()
+{
+    move = false;
+}
+
+function Movement(pointer)
+{
+            if(pointer.x > rocket.position.x+28)
+                {
+                    rocket.body.velocity.x = 250; 
+                }
+            else if(pointer.x < rocket.position.x+28)
+                {
+                    rocket.body.velocity.x = -250;
+                }
+}
 
 game.state.add('Preload', Preload);
 game.state.add('PlayGame',PlayGame);
