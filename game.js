@@ -1,12 +1,16 @@
 var game = new Phaser.Game(400,600,Phaser.AUTO);
 var rocket;
 var background;
-var bullet;
 var move;
 var astroids;
 var astroidrnd;
 var timer;
 var touch;
+var bullets;
+var bulletTime = 0;
+var bullet;
+var bulletDelay = true;
+var nextShot;
 
 var Preload =
 {
@@ -28,6 +32,7 @@ var PlayGame =
         game.physics.startSystem(Phaser.Physics.ARCADE);
         background = game.add.tileSprite(0,0,400,600,'background');
         rocket = game.add.sprite(171,520,'rocket');
+        rocket.anchor.setTo(0,0);
         
         astroids = game.add.group();
         game.time.events.loop(Phaser.Timer.SECOND*3, this.RandomAstroid, this);
@@ -38,6 +43,15 @@ var PlayGame =
         game.input.onDown.add(moveIsTrue, this);
         
         game.input.onUp.add(moveIsFalse);
+        
+        bullets = game.add.group();
+        bullets.enableBody = true;
+        bullets.physicsBodyType = Phaser.Physics.ARCADE;
+
+        bullets.createMultiple(20, 'bullet');
+
+        bullets.callAll('anchor.setTo','anchor',0.5,1.0);
+        bullets.setAll('checkWorldBounds',true);
 	},
 	update: function()
 	{
@@ -77,7 +91,10 @@ var PlayGame =
                 rocket.body.velocity.x = 0;
             }
             }
-
+        if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && bulletDelay == true)
+    	{
+    		shootBullet();
+        }
 		},
       
 	RandomAstroid: function(){
