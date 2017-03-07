@@ -31,6 +31,7 @@ var PlayGame =
         
         astroids = game.add.group();
         game.time.events.loop(Phaser.Timer.SECOND*3, this.RandomAstroid, this);
+        game.time.events.loop(Phaser.Timer.SECOND*2, this.RandomAstroid, this);
         
         game.physics.arcade.enable(rocket);
         
@@ -78,9 +79,11 @@ var PlayGame =
             }
 
 		},
+      
 	RandomAstroid: function(){
+		/*TODO astroid out of bounds = dead*/
 		randomX = game.rnd.integerInRange(-80,400);
-		astroidrnd = astroids.create(randomX,0,'astroid');
+		astroidrnd = astroids.create(randomX,-80,'astroid');
 		astroidrnd.scale.setTo(game.rnd.realInRange(0.4,1.2))
 		game.physics.arcade.enable(astroidrnd);
 		astroidrnd.body.velocity.setTo(0,300);
