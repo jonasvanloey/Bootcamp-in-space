@@ -5,6 +5,8 @@ var bullet;
 var astroids;
 var astroidrnd;
 var timer;
+var size;
+var tween;
 var Preload =
 {
 	preload: function() {
@@ -45,10 +47,7 @@ var PlayGame =
 	update: function()
 	{
 
-		if(timer=0){
-			console.log("timer is 0");
-			
-		}
+		
 	
 		//background.tilePosition.y += 3;
 	},
@@ -56,9 +55,23 @@ var PlayGame =
 		/*TODO astroid out of bounds = dead*/
 		randomX = game.rnd.integerInRange(-80,400);
 		astroidrnd = astroids.create(randomX,-80,'astroid');
-		astroidrnd.scale.setTo(game.rnd.realInRange(0.4,1.2))
+		size = game.rnd.realInRange(0.4,1.2);
+		astroidrnd.scale.setTo(0.2);
+        astroidrnd.alpha = 0;
+        game.add.tween(astroidrnd.scale).to( {x:size,y:size },1000, Phaser.Easing.Linear.None, true);
+        game.add.tween(astroidrnd).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
 		game.physics.arcade.enable(astroidrnd);
-		astroidrnd.body.velocity.setTo(0,300);
+		if(size < 0.8)
+		{
+			
+			astroidrnd.body.velocity.setTo(0,game.rnd.integerInRange(250,400));
+		}
+		else{
+			
+			astroidrnd.body.velocity.setTo(0,game.rnd.integerInRange(150,300));
+		}
+         
+		
 
 	}
 };
