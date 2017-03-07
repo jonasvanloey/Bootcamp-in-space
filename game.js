@@ -19,7 +19,7 @@ var bullets;
 var bulletTime = 0;
 var bullet;
 var bulletDelay = true;
-var nextShot;
+var nextShot = 0;
 
 var Preload =
 {
@@ -43,10 +43,14 @@ var PlayGame =
         background = game.add.tileSprite(0,0,400,600,'background');
         rocket = game.add.sprite(171,520,'rocket');
 <<<<<<< HEAD
+<<<<<<< HEAD
         enemy = game.add.sprite(171,520,'enemy');
 =======
         rocket.anchor.setTo(0,0);
 >>>>>>> origin/master
+=======
+        rocket.anchor.setTo(0.5,0.5);
+>>>>>>> refs/remotes/TomVerschueren/master
         
         astroids = game.add.group();
         game.time.events.loop(Phaser.Timer.SECOND*3, this.RandomAstroid, this);
@@ -100,7 +104,7 @@ var PlayGame =
         }
         if(touch != null)
             {
-        if(rocket.position.x+28 < touch.x+15 && rocket.position.x+28 > touch.x-15)
+        if(rocket.position.x < touch.x+15 && rocket.position.x > touch.x-15)
             {
                 rocket.body.velocity.x = 0;
             }
@@ -157,15 +161,19 @@ function shootBullet(){
 		if(game.time.now >nextShot){
 		bullet = game.add.sprite(rocket.position.x,rocket.position.y,'bullet');
 		game.physics.arcade.enable(bullet);
-		bullet.body.velocity.setTo(0,-300);
+		bullet.body.velocity.setTo(0,-800);
 		}
 <<<<<<< HEAD
          
 		
 =======
 
+<<<<<<< HEAD
 		nextShot = game.time.now + 100;
 >>>>>>> origin/master
+=======
+		nextShot = game.time.now + 40;
+>>>>>>> refs/remotes/TomVerschueren/master
 	}
 
 function moveIsTrue(pointer)
@@ -181,11 +189,11 @@ function moveIsFalse()
 
 function Movement(pointer)
 {
-            if(pointer.x > rocket.position.x+28)
+            if(pointer.x > rocket.position.x)
                 {
                     rocket.body.velocity.x = 250; 
                 }
-            else if(pointer.x < rocket.position.x+28)
+            else if(pointer.x < rocket.position.x)
                 {
                     rocket.body.velocity.x = -250;
                 }
