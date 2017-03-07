@@ -88,7 +88,7 @@ var PlayGame =
         }
         if(touch != null)
             {
-        if(rocket.position.x < touch.x+15 && rocket.position.x+28 > touch.x-15)
+        if(rocket.position.x < touch.x+15 && rocket.position.x > touch.x-15)
             {
                 rocket.body.velocity.x = 0;
             }
@@ -146,11 +146,11 @@ function moveIsFalse()
 
 function Movement(pointer)
 {
-            if(pointer.x > rocket.position.x+28)
+            if(pointer.x > rocket.position.x)
                 {
                     rocket.body.velocity.x = 250; 
                 }
-            else if(pointer.x < rocket.position.x+28)
+            else if(pointer.x < rocket.position.x)
                 {
                     rocket.body.velocity.x = -250;
                 }
