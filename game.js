@@ -1,18 +1,19 @@
 var game = new Phaser.Game(400,600,Phaser.AUTO);
 var rocket;
 var background;
-var bullet;
 var move;
 var astroids;
 var astroidrnd;
 var timer;
-<<<<<<< HEAD
 var size;
 var tween;
-=======
 var touch;
+var bullets;
+var bulletTime = 0;
+var bullet;
+var bulletDelay = true;
+var nextShot;
 
->>>>>>> origin/master
 var Preload =
 {
 	preload: function() {
@@ -33,6 +34,7 @@ var PlayGame =
         game.physics.startSystem(Phaser.Physics.ARCADE);
         background = game.add.tileSprite(0,0,400,600,'background');
         rocket = game.add.sprite(171,520,'rocket');
+        rocket.anchor.setTo(0,0);
         
         astroids = game.add.group();
         game.time.events.loop(Phaser.Timer.SECOND*3, this.RandomAstroid, this);
@@ -43,6 +45,15 @@ var PlayGame =
         game.input.onDown.add(moveIsTrue, this);
         
         game.input.onUp.add(moveIsFalse);
+        
+        bullets = game.add.group();
+        bullets.enableBody = true;
+        bullets.physicsBodyType = Phaser.Physics.ARCADE;
+
+        bullets.createMultiple(20, 'bullet');
+
+        bullets.callAll('anchor.setTo','anchor',0.5,1.0);
+        bullets.setAll('checkWorldBounds',true);
 	},
 	update: function()
 	{
@@ -82,16 +93,12 @@ var PlayGame =
                 rocket.body.velocity.x = 0;
             }
             }
-
-<<<<<<< HEAD
-		
-	
-		//background.tilePosition.y += 3;
-	},
-=======
+    
+        if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && bulletDelay == true)
+    	{
+    		shootBullet();
+        }
 		},
-      
->>>>>>> origin/master
 	RandomAstroid: function(){
 		/*TODO astroid out of bounds = dead*/
 		randomX = game.rnd.integerInRange(-80,400);
@@ -102,7 +109,6 @@ var PlayGame =
         game.add.tween(astroidrnd.scale).to( {x:size,y:size },1000, Phaser.Easing.Linear.None, true);
         game.add.tween(astroidrnd).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
 		game.physics.arcade.enable(astroidrnd);
-<<<<<<< HEAD
 		if(size < 0.8)
 		{
 			
@@ -111,15 +117,21 @@ var PlayGame =
 		else{
 			
 			astroidrnd.body.velocity.setTo(0,game.rnd.integerInRange(150,300));
-		}
-         
-		
-
-=======
-		astroidrnd.body.velocity.setTo(0,300);
->>>>>>> origin/master
+    }
+    
 	}
 };
+
+function shootBullet(){
+
+		if(game.time.now >nextShot){
+		bullet = game.add.sprite(rocket.position.x,rocket.position.y,'bullet');
+		game.physics.arcade.enable(bullet);
+		bullet.body.velocity.setTo(0,-300);
+		}
+
+		nextShot = game.time.now + 100;
+	}
 
 function moveIsTrue(pointer)
 {
