@@ -107,6 +107,17 @@ var PlayGame =
 	}
 };
 
+function shootBullet(){
+
+		if(game.time.now >nextShot){
+		bullet = game.add.sprite(rocket.position.x,rocket.position.y,'bullet');
+		game.physics.arcade.enable(bullet);
+		bullet.body.velocity.setTo(0,-300);
+		}
+
+		nextShot = game.time.now + 100;
+	}
+
 function moveIsTrue(pointer)
 {
     move = true;
